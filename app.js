@@ -25,12 +25,26 @@ app.get('/', function(req, res){
 
 io.sockets.on('connection', function(client){
 
+    client.on('setName', function(data){
+        if(!client.name){
+            client.name = data.name;
+            client.emit('message', {'data': 'Say hello: '+client.name});
+            client.broadcast.emit('message', {'data': 'Say hello to: '+client.name});
+        }else{
+            if(client.name == data.name){
+                client.emit('message', {'data':'Your new name the same as old'});
+            }else{
+                var response = client.name+'change his name to : '+data.name;
+                client.emit('message', {'data': 'You change the name to: '+client.name});
+                client.broadcast.emit('message', {'data': client.name+'change his name to: '+data.name});
+                client.name = data.name;
+            }
+        }
+    });
 
-    client.emit('answer', {'data': 'Welcome to our chat'});
-
-    client.on('message', function(data){
-        console.log(data.send);
-        io.sockets.emit('answer', {'data': data.send});
+    client.on('newMessage', function(data){
+        client.emit('message', {'data': 'I said : '+data.message});
+        client.broadcast.emit('message', {'data': client.name+': '+data.message});
     });
 
 
