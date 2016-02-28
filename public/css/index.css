@@ -1,0 +1,14 @@
+#header img{
+    max-width: 100px;
+}
+
+.chatHolder{
+    border: solid #A29999 1px;
+    border-radius: 5px;
+    overflow: scroll;
+    height: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+

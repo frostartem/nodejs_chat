@@ -2,9 +2,29 @@ extends ./layout.jade
 script(src='/home.js')
 
 block title
-    title jMy own NODE JS chat
+    title #{title}
 
 block content
+
     .row
-        .col-md-12
-            adas
+        .col-md-4.col-md-offset-4
+            if name
+                .nameHolder
+                    !='Hello, '+name
+            else
+                .input-group
+                    input(type="text" class="form-control" placeholder="Write your name...")
+                    span.input-group-btn
+                        button(class="btn btn-default" type="button") Save
+
+    .row
+        .col-md-6.col-md-offset-3.chatHolder
+
+    .row
+        .col-md-6.col-md-offset-3
+            .input-group
+                input(type="text" class="form-control" placeholder="Write a message...")
+                span.input-group-btn
+                    button(class="btn btn-default" type="button") Send
+
+

@@ -13,13 +13,13 @@ app.set('views', __dirname+'/tpl');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
 
-app.use(express.static(__dirname+'/script'));
+app.use(express.static(__dirname+'/public'));
 
 var io = socket.listen(app.listen(8080));
 
 
 app.get('/', function(req, res){
-    res.render('home');
+    res.render('home', {'title':'Home Node JS'});
     res.end();
 });
 
